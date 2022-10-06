@@ -26,10 +26,34 @@ export default function Textform(props) {
     setText('');
     console.log('text cleared');
   }
+
+  const [defaultStyle, setStyle] = useState({
+    color: 'black',
+    backgroundColor: 'white',
+  });
+  const [btnText , setBtnText]=useState("☀️");
+  function darkToggle() {
+    if (defaultStyle.color === 'black') {
+      setStyle({
+        color: 'white',
+        backgroundColor: 'rgb(100,100,100)',
+      });
+      setBtnText("🌙");
+    } else {
+      setStyle({
+        color: 'black',
+        backgroundColor: 'white',
+      });
+      setBtnText("☀️");
+    }
+  }
   return (
     <>
-      <div className="container my-3">
+      <div className="container my-3" style={defaultStyle}>
         <h1>{props.heading}</h1>
+        <button className="btn btn-primary" onClick={darkToggle}>
+          {btnText}
+        </button>
         <textarea
           className="form-control my-4"
           id="exampleFormControlTextarea1"
@@ -52,12 +76,12 @@ export default function Textform(props) {
             Clear text
           </button>
         </div>
-        <p class="my-2">
+        <p className="my-2">
           {text.split(' ').length} words and {text.length} characters
         </p>
         <p>{text.split(' ').length * 0.08} minutes read</p>
       </div>
-      <div className="container">
+      <div className="container" style={defaultStyle}>
         <h2>Preview</h2>
         <p>{text}</p>
       </div>
