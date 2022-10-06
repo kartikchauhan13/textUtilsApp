@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import './Textform.css';
 
 export default function Textform(props) {
   const [text, setText] = useState('');
@@ -12,8 +13,21 @@ export default function Textform(props) {
     setText(newText);
     console.log('text changed to upper case ');
   }
+  function lower() {
+    const newText = text.toLowerCase();
+    setText(newText);
+    console.log('text changed to lower case ');
+  }
+  function copyText() {
+    navigator.clipboard.writeText(String(text));
+    console.log(typeof text);
+  }
+  function clearText() {
+    setText('');
+    console.log('text cleared');
+  }
   return (
-    <div>
+    <>
       <div className="container my-3">
         <h1>{props.heading}</h1>
         <textarea
@@ -24,10 +38,29 @@ export default function Textform(props) {
           value={text}
           onChange={onChangeFunc}
         ></textarea>
-        <button className="btn btn-primary" onClick={upper}>
-          Uppercase
-        </button>
+        <div>
+          <button className="btn btn-primary" onClick={upper}>
+            Uppercase
+          </button>
+          <button className="btn btn-success mx-2" onClick={lower}>
+            Lowercase
+          </button>
+          <button className="btn btn-secondary mx-1" onClick={copyText}>
+            Copy to Clipboard
+          </button>
+          <button className="btn btn-danger mx-1" onClick={clearText}>
+            Clear text
+          </button>
+        </div>
+        <p class="my-2">
+          {text.split(' ').length} words and {text.length} characters
+        </p>
+        <p>{text.split(' ').length * 0.08} minutes read</p>
       </div>
-    </div>
+      <div className="container">
+        <h2>Preview</h2>
+        <p>{text}</p>
+      </div>
+    </>
   );
 }
