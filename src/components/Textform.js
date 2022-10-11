@@ -27,33 +27,13 @@ export default function Textform(props) {
     console.log('text cleared');
   }
 
-  const [defaultStyle, setStyle] = useState({
-    color: 'black',
-    backgroundColor: 'white',
-  });
-  const [btnText , setBtnText]=useState("☀️");
-  function darkToggle() {
-    if (defaultStyle.color === 'black') {
-      setStyle({
-        color: 'white',
-        backgroundColor: 'rgb(100,100,100)',
-      });
-      setBtnText("🌙");
-    } else {
-      setStyle({
-        color: 'black',
-        backgroundColor: 'white',
-      });
-      setBtnText("☀️");
-    }
-  }
   return (
     <>
-      <div className="container my-3" style={defaultStyle}>
+      <div
+        className="container my-3 "
+        style={{ color: props.mode == 'light' ? 'black' : 'white' }}
+      >
         <h1>{props.heading}</h1>
-        <button className="btn btn-primary" onClick={darkToggle}>
-          {btnText}
-        </button>
         <textarea
           className="form-control my-4"
           id="exampleFormControlTextarea1"
@@ -61,6 +41,10 @@ export default function Textform(props) {
           placeholder="enter text here !"
           value={text}
           onChange={onChangeFunc}
+          style={{
+            backgroundColor: props.mode == 'light' ? 'lightgreen' : '#4C6793',
+            color: props.mode == 'light' ? 'black' : 'white',
+          }}
         ></textarea>
         <div>
           <button className="btn btn-primary" onClick={upper}>
@@ -81,9 +65,14 @@ export default function Textform(props) {
         </p>
         <p>{text.split(' ').length * 0.08} minutes read</p>
       </div>
-      <div className="container" style={defaultStyle}>
+      <div
+        className="container"
+        style={{ color: props.mode == 'light' ? 'black' : 'white' }}
+      >
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>
+          {text.length > 0 ? text : 'Enter text above in box for the preview'}
+        </p>
       </div>
     </>
   );
