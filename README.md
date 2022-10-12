@@ -1,3 +1,3 @@
 # textUtilsApp
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-fufpm8)
+[App live on StackBlitz ⚡️](https://react-fufpm8.stackblitz.io)
